@@ -1,2 +1,6 @@
-import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";
+import { FMBucket } from "./resources/bucket";
+
+new FMBucket({
+  Name: "fm-bucket",
+  Product: "devops-course",
+});
