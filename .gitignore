@@ -1,0 +1,6 @@
+/bin/
+/node_modules/
+
+# Pulumi
+/.pulumi./
+Pulumi.dev.yaml
