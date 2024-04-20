@@ -1,14 +1,22 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";
+import { FMBucket } from "./resources/bucket";
 
-type FMBucketArgs = {
+type FMFrontendArgs = {
   Name: string;
   Product: string;
 };
 
-export class FMBucket extends pulumi.ComponentResource {
-  constructor(args: FMBucketArgs, opts?: pulumi.ComponentResourceOptions) {
+export class FMFrontend extends pulumi.ComponentResource {
+  constructor(args: FMFrontendArgs, opts?: pulumi.ComponentResourceOptions) {
     const resourceName = `${args.Product}-${args.Name}`;
-    super("pkg:index:FMBucket", resourceName, {}, opts);
+    super("pkg:index:FMFrontend", resourceName, {}, opts);
+
+    const source = new FMBucket(
+      {
+        Name: args.Name,
+        Product: args.Product,
+      },
+      { parent: this }
+    );
   }
 }
