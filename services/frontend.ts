@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import { FMBucket } from "./resources/bucket";
+import { FMBucket } from "../resources/bucket";
 
 type FMFrontendArgs = {
   Name: string;

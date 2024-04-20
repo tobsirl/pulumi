@@ -1,12 +1,10 @@
-import { FMBucket } from "./resources/bucket";
+import { FMFrontend } from "./services/frontend";
 
 function main() {
-  console.log("Hello world");
+  new FMFrontend({
+    Name: "FM Frontend",
+    Product: "FM",
+  });
 }
 
 main();
-
-new FMBucket({
-  Name: "fm-bucket-tobsirl",
-  Product: "devops-course",
-});
