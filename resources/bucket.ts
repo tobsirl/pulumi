@@ -1,5 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
+import { s3 } from "@pulumi/aws/types/enums";
+import { Environment } from "@pulumi/aws/appconfig";
 
 type FMBucketArgs = {
   Name: string;
@@ -17,20 +19,17 @@ export class FMBucket extends pulumi.ComponentResource {
 
     const bucketName = `${resourceName}-${stack}`;
 
-    const bucket = new aws.s3.Bucket(
-      args.Name,
-      {
-        bucket: bucketName,
-        acl: aws.s3.CannedAcl.Private,
-        tags: {
-          Name: bucketName,
-          Environment: stack,
-        },
+    let bucketArgs: s3.BucketArgs = {
+      acl: "private",
+      bucket: bucketName,
+      tags: {
+        Environment: stack,
       },
-      {
-        parent: this,
-      }
-    );
+    };
+
+    const bucket = new aws.s3.Bucket(args.Name, bucketArgs, {
+      parent: this,
+    });
 
     if (args.Public) {
       new aws.s3.BucketPublicAccessBlock(
