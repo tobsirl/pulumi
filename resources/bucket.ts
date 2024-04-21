@@ -4,7 +4,7 @@ import * as aws from "@pulumi/aws";
 type FMBucketArgs = {
   Name: string;
   Product: string;
-  Public: boolean;
+  Public?: boolean;
 };
 
 export class FMBucket extends pulumi.ComponentResource {

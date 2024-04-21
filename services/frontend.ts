@@ -11,10 +11,11 @@ export class FMFrontend extends pulumi.ComponentResource {
     const resourceName = `${args.Product}-${args.Name}`;
     super("pkg:index:FMFrontend", resourceName, {}, opts);
 
-    const source = new FMBucket(
+    new FMBucket(
       {
         Name: args.Name,
         Product: args.Product,
+        Public: true,
       },
       { parent: this }
     );
