@@ -4,6 +4,7 @@ import * as aws from "@pulumi/aws";
 type FMBucketArgs = {
   Name: string;
   Product: string;
+  Public: boolean;
 };
 
 export class FMBucket extends pulumi.ComponentResource {
@@ -31,18 +32,20 @@ export class FMBucket extends pulumi.ComponentResource {
       }
     );
 
-    new aws.s3.BucketPublicAccessBlock(
-      args.Name,
-      {
-        bucket: bucket.id,
-        blockPublicAcls: true,
-        blockPublicPolicy: true,
-        ignorePublicAcls: true,
-        restrictPublicBuckets: true,
-      },
-      {
-        parent: this,
-      }
-    );
+    if (args.Public) {
+      new aws.s3.BucketPublicAccessBlock(
+        args.Name,
+        {
+          bucket: bucket.id,
+          blockPublicAcls: true,
+          blockPublicPolicy: true,
+          ignorePublicAcls: true,
+          restrictPublicBuckets: true,
+        },
+        {
+          parent: this,
+        }
+      );
+    }
   }
 }
