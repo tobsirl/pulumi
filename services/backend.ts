@@ -1,5 +1,4 @@
 import * as pulumi from "@pulumi/pulumi";
-import { FMBucket } from "../resources/bucket";
 
 type FMBackendArgs = {
   Name: string;
