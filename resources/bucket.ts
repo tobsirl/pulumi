@@ -1,7 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-import { s3 } from "@pulumi/aws/types/enums";
-import { Environment } from "@pulumi/aws/appconfig";
 
 type FMBucketArgs = {
   Name: string;
@@ -19,7 +17,7 @@ export class FMBucket extends pulumi.ComponentResource {
 
     const bucketName = `${resourceName}-${stack}`;
 
-    let bucketArgs: s3.BucketArgs = {
+    let bucketArgs: aws.s3.BucketArgs = {
       acl: "private",
       bucket: bucketName,
       tags: {
